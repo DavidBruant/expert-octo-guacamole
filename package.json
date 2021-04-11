@@ -1,0 +1,26 @@
+{
+  "name": "front-end-template",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c",
+    "predev": "mkdir -p _site/build && ln -f build/* _site/build",
+    "dev": "npm-run-all --parallel dev:* start",
+    "dev:jekyll": "bundle exec jekyll build -w --incremental --config _config.yml,_config_dev.yml",
+    "dev:rollup": "rollup -c -w",
+    "start": "serve _site"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.45.1",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.32.8",
+    "serve": "^11.3.2",
+    "svelte": "^3.37.0",
+    "svelte-preprocess": "^4.7.0"
+  }
+}

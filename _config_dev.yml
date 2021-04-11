@@ -1,0 +1,4 @@
+# in dev, the build directory is linked to _site/build
+
+keep_files:
+  - build
