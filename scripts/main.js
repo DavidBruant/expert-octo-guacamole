@@ -14,7 +14,7 @@ const width = 954;
 const height = 600;
 const _color = scaleOrdinal(schemeCategory10);
 const color = d => _color(d.category === undefined ? d.name : d.category);
-const edgeColor = 'path';
+const edgeColor = 'none';
 
 var count = 0;
 
@@ -31,13 +31,7 @@ Id.prototype.toString = function() {
   return "url(" + this.href + ")";
 };
 
-
-
 const _nodes = Array.from(new Set(_links.flatMap(l => [l.source, l.target])), name => ({name, category: name.replace(/ .*/, "")}));
-
-
-const svg = create("svg")
-    .attr("viewBox", [0, 0, width, height]);
 
 const _sankey = sankey()
     .nodeId(d => d.name)
@@ -55,6 +49,9 @@ const __sankey = ({nodes, links}) => _sankey({
 const { nodes, links } = __sankey({nodes: _nodes, links: _links});
 
 console.log('nodes, links', nodes, links)
+
+const svg = create("svg")
+    .attr("viewBox", [0, 0, width, height]);
 
 svg.append("g")
     .attr("stroke", "#000")
@@ -76,22 +73,6 @@ const link = svg.append("g")
     .data(links)
     .join("g")
     .style("mix-blend-mode", "multiply");
-
-if (edgeColor === "path") {
-    const gradient = link.append("linearGradient")
-        .attr("id", d => (d.uid = Uid("link")).id)
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", d => d.source.x1)
-        .attr("x2", d => d.target.x0);
-
-    gradient.append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", d => color(d.source));
-
-    gradient.append("stop")
-        .attr("offset", "100%")
-        .attr("stop-color", d => color(d.target));
-}
 
 link.append("path")
     .attr("d", sankeyLinkHorizontal())
