@@ -46,7 +46,6 @@ const budgNodes = {
     'DF_Interventions': 'Interventions (SDIS …)',
     'DF_Autres': 'Autres (personnel …)',
 
-    'I': 'Investissement',
     'I_Emprunt': 'Emprunts',
     'I_Autres': `Autres recettes d'investissement`,
 
@@ -126,7 +125,7 @@ d3.csv('./data/energy.csv').then(_links => {
         // Investissement
         {
             source: budgNodes.EP,
-            target: budgNodes.I,
+            target: budgNodes.DI,
             value: 150.2
         },
         {
@@ -141,17 +140,10 @@ d3.csv('./data/energy.csv').then(_links => {
         },
         {
             source: budgNodes.RI,
-            target: budgNodes.I,
+            target: budgNodes.DI,
             value : 70.0 + 36.2
         },
 
-
-
-        {
-            source: budgNodes.I,
-            target: budgNodes.DI,
-            value: 256.4 
-        },
 
         // Dépenses d'investissement
         {
