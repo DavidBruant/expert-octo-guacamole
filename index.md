@@ -9,3 +9,9 @@ styles:
 # Sankey budg
 
 <section class="content"></section>
+
+<style>
+.content svg{
+    max-width: 60em;
+}
+</style>
