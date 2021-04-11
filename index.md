@@ -6,10 +6,6 @@ styles:
     - href: "./build/bundle.css"
 ---
 
-# Test page
+# Sankey budg
 
-Something should be written here:
-
-<section class="svelte-main"></section>
-
-Did it work?
+<section class="content"></section>

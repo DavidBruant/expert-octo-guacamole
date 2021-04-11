@@ -1,10 +1,11 @@
-# Front-end template
+# Sankey budget
 
-This repo is meant to be a template repo. Not useful in itself, but a starter kit for other projects
+Ce repo a pour objet de visualiser un budget de collectivité territoriale comme un diagrame Sankey
+
+
+## Tech
 
 This repo is based on [Jekyll](jekyllrb.com/), so content can be written in markdown or HTML
-
-A simple theme is already set up
 
 A JavaScript bundler with [svelte](https://svelte.dev/) is set up
 

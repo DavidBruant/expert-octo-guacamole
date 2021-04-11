@@ -22,5 +22,9 @@
     "serve": "^11.3.2",
     "svelte": "^3.37.0",
     "svelte-preprocess": "^4.7.0"
+  },
+  "dependencies": {
+    "d3": "^6.6.2",
+    "d3-sankey": "^0.12.3"
   }
 }
