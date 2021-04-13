@@ -26,12 +26,10 @@ const _sankey = sankey()
     .extent([[1, 5], [width - 1, height - 5]]);
 
 
-const __sankey = ({nodes, links}) => _sankey({
+const { nodes, links } = _sankey({
     nodes: _nodes.map(d => Object.assign({}, d)),
     links: _links.map(d => Object.assign({}, d))
 });
-
-const { nodes, links } = __sankey({nodes: _nodes, links: _links});
 
 console.log('nodes, links', nodes, links)
 
