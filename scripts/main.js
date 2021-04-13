@@ -17,7 +17,7 @@ const height = 600;
 const _color = scaleOrdinal(schemeCategory10);
 const color = d => _color(d.name);
 
-const _nodes = Array.from(new Set(_links.flatMap(l => [l.source, l.target])), name => ({name}));
+const _nodes = [...new Set(_links.flatMap(l => [l.source, l.target]))].map(name => ({name}));
 
 const { nodes, links } = sankeyLayout({nodes: _nodes, links: _links, height, width})
 
