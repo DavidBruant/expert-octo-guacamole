@@ -14,22 +14,7 @@ const width = 954;
 const height = 600;
 const _color = scaleOrdinal(schemeCategory10);
 const color = d => _color(d.category === undefined ? d.name : d.category);
-const edgeColor = 'none';
 
-var count = 0;
-
-function Uid(name) {
-  return new Id("O-" + (name == null ? "" : name + "-") + ++count);
-}
-
-function Id(id) {
-  this.id = id;
-  this.href = new URL(`#${id}`, location) + "";
-}
-
-Id.prototype.toString = function() {
-  return "url(" + this.href + ")";
-};
 
 const _nodes = Array.from(new Set(_links.flatMap(l => [l.source, l.target])), name => ({name, category: name.replace(/ .*/, "")}));
 
@@ -76,10 +61,7 @@ const link = svg.append("g")
 
 link.append("path")
     .attr("d", sankeyLinkHorizontal())
-    .attr("stroke", d => edgeColor === "none" ? "#aaa"
-        : edgeColor === "path" ? d.uid
-            : edgeColor === "input" ? color(d.source)
-                : color(d.target))
+    .attr("stroke", d => "#aaa")
     .attr("stroke-width", d => Math.max(1, d.width));
 
 link.append("title")
