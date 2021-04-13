@@ -6,30 +6,20 @@ import {create} from 'd3-selection'
 import {format} from 'd3-format'
 import {schemeCategory10} from 'd3-scale-chromatic'
 import {scaleOrdinal} from 'd3-scale'
-import { sankeyLinkHorizontal, sankey, sankeyJustify } from 'd3-sankey'
+import { sankeyLinkHorizontal } from 'd3-sankey'
+
+import sankeyLayout from './sankeyLayout.js'
 import _links from './budgetData.js'
 
 
 const width = 954;
 const height = 600;
 const _color = scaleOrdinal(schemeCategory10);
-const color = d => _color(d.category === undefined ? d.name : d.category);
+const color = d => _color(d.name);
 
+const _nodes = Array.from(new Set(_links.flatMap(l => [l.source, l.target])), name => ({name}));
 
-const _nodes = Array.from(new Set(_links.flatMap(l => [l.source, l.target])), name => ({name, category: name.replace(/ .*/, "")}));
-
-const _sankey = sankey()
-    .nodeId(d => d.name)
-    .nodeAlign(sankeyJustify)
-    .nodeWidth(15)
-    .nodePadding(15)
-    .extent([[1, 5], [width - 1, height - 5]]);
-
-
-const { nodes, links } = _sankey({
-    nodes: _nodes.map(d => Object.assign({}, d)),
-    links: _links.map(d => Object.assign({}, d))
-});
+const { nodes, links } = sankeyLayout({nodes: _nodes, links: _links, height, width})
 
 console.log('nodes, links', nodes, links)
 
