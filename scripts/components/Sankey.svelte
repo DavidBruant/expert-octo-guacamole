@@ -19,7 +19,6 @@
             
                 stroke="url(https://d3.static.observableusercontent.com/worker/worker.b27817614567202ca570c82c9fabb31eb369828472fb4541a8cb38bc0f0813a3.html#O-link-50)"
             -->
-
             <path
                 d={d(link)}
                 stroke="#aaa"
@@ -31,7 +30,16 @@
         {/each}
     </g>
     <g font-family="sans-serif" font-size="10">
-        <text x="22" y="32.339830893201686" dy="0.35em" text-anchor="start" >Dotation de l'État</text>
+        {#each nodes as {x0, y0, x1, y1, name}}
+        <text 
+            x={x0 < width / 2 ? x1 + 6 : x0 - 6} 
+            y={(y1 + y0) / 2} 
+            dy="0.35em" 
+            text-anchor={x0 < width / 2 ? "start" : "end"}
+        >
+        {name}
+        </text>
+        {/each}
     </g>
 </svg>
 
@@ -50,23 +58,5 @@
     export let links;
 
     const d = sankeyLinkHorizontal()
-
-
-    /*
-
-svg.append("g")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .selectAll("text")
-    .data(nodes)
-    .join("text")
-    .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-    .attr("y", d => (d.y1 + d.y0) / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-    .text(d => d.name);
-
-    */
-
 
 </script>
