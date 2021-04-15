@@ -6,8 +6,8 @@ import sankeyLayout from './sankeyLayout.js'
 import {nodesById, links as _links} from './budgetData.js'
 import Sankey from './components/Sankey.svelte'
 
-const width = 954;
-const height = 600;
+const width = 900;
+const height = 500;
 
 console.log('nodesById, _links', nodesById, _links)
 
