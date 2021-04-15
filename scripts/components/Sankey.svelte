@@ -9,18 +9,13 @@
     <g fill="none" stroke-opacity="0.5">
         {#each links as link}
         <g style="mix-blend-mode: multiply;">
-            <!--
-            <linearGradient id="O-link-50" gradientUnits="userSpaceOnUse" x1="149.85714285714286" x2="268.7142857142857">
-                <stop offset="0%" stop-color="#bcbd22"></stop>
-                <stop offset="100%" stop-color="#2ca02c"></stop>
+            <linearGradient id={`link-${link.index}`}>
+                <stop offset="0%" stop-color={link.source.color}></stop>
+                <stop offset="100%" stop-color={link.target.color}></stop>
             </linearGradient>
-            
-            
-                stroke="url(https://d3.static.observableusercontent.com/worker/worker.b27817614567202ca570c82c9fabb31eb369828472fb4541a8cb38bc0f0813a3.html#O-link-50)"
-            -->
             <path
                 d={d(link)}
-                stroke="#aaa"
+                stroke={`url('#link-${link.index}')`}
                 stroke-width={Math.max(1, link.width)}
             />
             <title>{`${link.source.text} → ${link.target.text}\n${format(link.value)}`}</title>
