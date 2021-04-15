@@ -2,70 +2,30 @@
 
 // adapted from https://observablehq.com/@d3/sankey-diagram (ISC licence)
 
-import {create} from 'd3-selection'
-import {format} from 'd3-format'
-import {schemeCategory10} from 'd3-scale-chromatic'
-import {scaleOrdinal} from 'd3-scale'
-import { sankeyLinkHorizontal } from 'd3-sankey'
-
 import sankeyLayout from './sankeyLayout.js'
-import _links from './budgetData.js'
-
+import {nodesById, links as _links} from './budgetData.js'
+import Sankey from './components/Sankey.svelte'
 
 const width = 954;
 const height = 600;
-const _color = scaleOrdinal(schemeCategory10);
-const color = d => _color(d.name);
 
-const _nodes = [...new Set(_links.flatMap(l => [l.source, l.target]))].map(name => ({name}));
+console.log('nodesById, _links', nodesById, _links)
 
-const { nodes, links } = sankeyLayout({nodes: _nodes, links: _links, height, width})
+const { nodes, links } = sankeyLayout({
+    nodes: [...nodesById.values()],
+    links: _links, 
+    height, 
+    width
+})
 
 console.log('nodes, links', nodes, links)
 
-const svg = create("svg")
-    .attr("viewBox", [0, 0, width, height]);
-
-svg.append("g")
-    .attr("stroke", "#000")
-    .selectAll("rect")
-    .data(nodes)
-    .join("rect")
-    .attr("x", d => d.x0)
-    .attr("y", d => d.y0)
-    .attr("height", d => d.y1 - d.y0)
-    .attr("width", d => d.x1 - d.x0)
-    .attr("fill", color)
-    .append("title")
-    .text(d => `${d.name}\n${format(d.value)}`);
-
-const link = svg.append("g")
-    .attr("fill", "none")
-    .attr("stroke-opacity", 0.5)
-    .selectAll("g")
-    .data(links)
-    .join("g")
-    .style("mix-blend-mode", "multiply");
-
-link.append("path")
-    .attr("d", sankeyLinkHorizontal())
-    .attr("stroke", d => "#aaa")
-    .attr("stroke-width", d => Math.max(1, d.width));
-
-link.append("title")
-    .text(d => `${d.source.name} → ${d.target.name}\n${format(d.value)}`);
-
-svg.append("g")
-    .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
-    .selectAll("text")
-    .data(nodes)
-    .join("text")
-    .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
-    .attr("y", d => (d.y1 + d.y0) / 2)
-    .attr("dy", "0.35em")
-    .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-    .text(d => d.name);
-
-
-document.querySelector('.content').append(svg.node())
+new Sankey({
+    target: document.querySelector('.content'),
+    props: {
+        width,
+        height,
+        nodes,
+        links
+    }
+})

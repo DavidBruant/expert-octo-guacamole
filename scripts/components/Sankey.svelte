@@ -1,23 +1,39 @@
-
-
-<svg viewBox="0,0,954,600">
-    <g stroke="#000">
-        <rect x="1" y="5" height="54.67966178640337" width="15" fill="#1f77b4">
-            <title>Dotation de l'État &gt;-187.1</title>
+<svg viewBox="0,0,{width},{height}">
+    <g stroke="#666" stroke-width="0">
+        {#each nodes as {x0, y0, x1, y1, text, value, color}}
+        <rect x={x0} y={y0} height={y1 - y0} width={x1 - x0} fill={color}>
+            <title>{`${text}\n${format(value)}`}</title>
         </rect>
+        {/each}
     </g>
-    <g fill="none" stroke-opacity="0.5">
+    <g fill="none" stroke-opacity="0.4">
+        {#each links as link}
         <g style="mix-blend-mode: multiply;">
+            <linearGradient id={`link-${link.index}`}>
+                <stop offset="0%" stop-color={link.source.color}></stop>
+                <stop offset="100%" stop-color={link.target.color}></stop>
+            </linearGradient>
             <path
-                d="M16,32.33983089320168C125.625,32.33983089320168,125.625,55.62943528217351,235.25,55.62943528217351"
-                stroke="#aaa"
-                stroke-width="54.67966178640335"
+                d={d(link)}
+                stroke={`url('#link-${link.index}')`}
+                stroke-width={Math.max(1, link.width)}
             />
-            <title >Dotation de l'État → Recettes de fonctionnement &gt;-187.1</title >
+            <title>{`${link.source.text} → ${link.target.text}\n${format(link.value)}`}</title>
+
         </g>
+        {/each}
     </g>
     <g font-family="sans-serif" font-size="10">
-        <text x="22" y="32.339830893201686" dy="0.35em" text-anchor="start" >Dotation de l'État</text>
+        {#each nodes as {x0, y0, x1, y1, text}}
+        <text 
+            x={x0 < width / 2 ? x1 + 6 : x0 - 6} 
+            y={(y1 + y0) / 2} 
+            dy="0.35em" 
+            text-anchor={x0 < width / 2 ? "start" : "end"}
+        >
+        {text}
+        </text>
+        {/each}
     </g>
 </svg>
 
@@ -26,5 +42,15 @@
 </style>
 
 <script>
-    //export let name;
+    import {format} from 'd3-format'
+    import { sankeyLinkHorizontal } from 'd3-sankey'
+
+    export let width;
+    export let height;
+
+    export let nodes;
+    export let links;
+
+    const d = sankeyLinkHorizontal()
+
 </script>
