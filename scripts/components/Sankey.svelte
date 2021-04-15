@@ -1,9 +1,8 @@
-
 <svg viewBox="0,0,{width},{height}">
     <g stroke="#000">
-        {#each nodes as {x0, y0, x1, y1, name, value}}
-        <rect x={x0} y={y0} height={y1 - y0} width={x1 - x0} fill="#1f77b4">
-            <title>{`${name}\n${format(value)}`}</title>
+        {#each nodes as {x0, y0, x1, y1, text, value, color}}
+        <rect x={x0} y={y0} height={y1 - y0} width={x1 - x0} fill={color}>
+            <title>{`${text}\n${format(value)}`}</title>
         </rect>
         {/each}
     </g>
@@ -24,20 +23,20 @@
                 stroke="#aaa"
                 stroke-width={Math.max(1, link.width)}
             />
-            <title>{`${link.source.name} → ${link.target.name}\n${format(link.value)}`}</title>
+            <title>{`${link.source.text} → ${link.target.text}\n${format(link.value)}`}</title>
 
         </g>
         {/each}
     </g>
     <g font-family="sans-serif" font-size="10">
-        {#each nodes as {x0, y0, x1, y1, name}}
+        {#each nodes as {x0, y0, x1, y1, text}}
         <text 
             x={x0 < width / 2 ? x1 + 6 : x0 - 6} 
             y={(y1 + y0) / 2} 
             dy="0.35em" 
             text-anchor={x0 < width / 2 ? "start" : "end"}
         >
-        {name}
+        {text}
         </text>
         {/each}
     </g>
