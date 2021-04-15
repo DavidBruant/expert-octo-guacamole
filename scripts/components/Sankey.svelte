@@ -1,12 +1,12 @@
 <svg viewBox="0,0,{width},{height}">
-    <g stroke="#000">
+    <g stroke="#666" stroke-width="0">
         {#each nodes as {x0, y0, x1, y1, text, value, color}}
         <rect x={x0} y={y0} height={y1 - y0} width={x1 - x0} fill={color}>
             <title>{`${text}\n${format(value)}`}</title>
         </rect>
         {/each}
     </g>
-    <g fill="none" stroke-opacity="0.5">
+    <g fill="none" stroke-opacity="0.4">
         {#each links as link}
         <g style="mix-blend-mode: multiply;">
             <linearGradient id={`link-${link.index}`}>
