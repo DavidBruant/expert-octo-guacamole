@@ -54,7 +54,7 @@
         </g>
         {/each}
     </g>
-    <g font-family="sans-serif" font-size="10">
+    <g font-family="sans-serif" font-size="14">
         {#each visibleNodes as {x0, y0, x1, y1, text}}
         <text 
             x={x0 < width / 2 ? x1 + 6 : x0 - 6} 
