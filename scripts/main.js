@@ -4,12 +4,8 @@
 
 import sankeyLayout from './sankeyLayout.js'
 import {nodesById, links as _links} from './budgetData.js'
-import Sankey from './components/Sankey.svelte'
-import Anim from './components/Anim.svelte'
+import AnimatedSankey from './components/AnimatedSankey.svelte'
 
-new Anim({
-    target: document.querySelector('.anim')
-})
 
 const width = 900;
 const height = 500;
@@ -25,14 +21,15 @@ const { nodes, links } = sankeyLayout({
 
 console.log('nodes, links', nodes, links)
 
-new Sankey({
+new AnimatedSankey({
     target: document.querySelector('.content'),
     props: {
         width,
         height,
         nodes,
         links
-    }
+    },
+    intro: true
 })
 
 

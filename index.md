@@ -6,28 +6,33 @@ styles:
     - href: "./build/bundle.css"
 ---
 
-# Sankey budg
+# Budget d'une collectivité territoriale
 
-<section class="anim"></section>
+Cette page essaye d'expliquer la construction et le fonctionnement du budget d'une collectivité territoriale.\
+Elle est basée sur les [données du Compte Administratif 2019 du Conseil Départemental de la Gironde](https://www.gironde.fr/un-budget-au-service-des-solidarites-humaine-et-territoriale#!/explorer)
 
+Il s'agit d'un *travail en cours* et d'une initiative **autonome**
 
 <section class="content"></section>
 
 <style>
 main{
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
+    padding: 1rem;
+    max-width: 100%;
     margin: 0 auto;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 60rem) {
     main{
-        max-width: none;
+        max-width: 60rem;
     }
 }
 
+h1{
+    text-align: center;
+}
+
 .content svg{
-    max-width: 60em;
+    max-width: 100%;
 }
 </style>
