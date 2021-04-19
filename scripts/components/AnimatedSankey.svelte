@@ -54,7 +54,7 @@
         </g>
         {/each}
     </g>
-    <g font-family="sans-serif" font-size="14">
+    <g font-family="sans-serif" font-size="13">
         {#each visibleNodes as {x0, y0, x1, y1, text}}
         <text 
             x={x0 < width / 2 ? x1 + 6 : x0 - 6} 
@@ -212,11 +212,9 @@
             développement du territoire girondin`,
             group: []
         }
-    ]
-
+    ];
 
     console.log('apparitionSequence', apparitionSequence)
-
 
     function play(){
         playing = true;
@@ -235,9 +233,13 @@
                         thisElementResolve()
                     }
 
-                    console.log('element', element)
-                    for(const e of element.group){
-                        e.introend = introend
+                    if(element.group.length >= 1){
+                        for(const e of element.group){
+                            e.introend = introend
+                        }
+                    }
+                    else{
+                        thisElementResolve()
                     }
 
                     appearingElements[nextToDisplayIndex] = element
@@ -249,10 +251,6 @@
 
                     return p;
                 }
-                else{
-                    return;
-                }
-
             })
         }
 
@@ -275,6 +273,6 @@
     $: visibleNodes = appearingElements.map(el => el.group).flat().filter(el => !el.source);
     $: visibleLinks = appearingElements.map(el => el.group).flat().filter(el => el.source);
 
-    $: console.log('visibles', visibleNodes, visibleLinks)
+    // $: console.log('visibles', visibleNodes, visibleLinks)
 
 </script>
